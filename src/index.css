@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════
+   PAPS Design System
+   Modern Minimal — warm, calm, focused
+   ═══════════════════════════════════════ */
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background: #f6f8fa;
+    color: #1e293b;
+  }
+}
+
+/* Card flip 3D */
+.perspective { perspective: 1000px; }
+.backface-hidden { backface-visibility: hidden; }
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in     { animation: fadeIn 0.35s ease-out; }
+.animate-fade-in-up  { animation: fadeInUp 0.4s ease-out; }
+.animate-scale-in    { animation: scaleIn 0.25s ease-out; }
+
+/* Smooth scroll */
+html { scroll-behavior: smooth; }
+
+/* Selection */
+::selection {
+  background: #c7d2fe;
+  color: #3730a3;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}

@@ -1,0 +1,770 @@
+[
+  {
+    "kata": "Abolisi",
+    "sinonim": "penghapusan, pembatalan"
+  },
+  {
+    "kata": "Abonemen",
+    "sinonim": "berlangganan"
+  },
+  {
+    "kata": "Absen",
+    "sinonim": "tidak masuk, tidak hadir"
+  },
+  {
+    "kata": "Abolut",
+    "sinonim": "mutlak, tidak terbatas"
+  },
+  {
+    "kata": "Absorpsi",
+    "sinonim": "penyerapan"
+  },
+  {
+    "kata": "Afeksi",
+    "sinonim": "kasih sayang"
+  },
+  {
+    "kata": "Afinitas",
+    "sinonim": "ketertarikan, simpati"
+  },
+  {
+    "kata": "Agitasi",
+    "sinonim": "hasutan"
+  },
+  {
+    "kata": "Agraria",
+    "sinonim": "urusan pertanian"
+  },
+  {
+    "kata": "Ajun",
+    "sinonim": "ajudan, menyimpang jauh dari tujuan"
+  },
+  {
+    "kata": "Akselerasi",
+    "sinonim": "percepatan"
+  },
+  {
+    "kata": "Aktual",
+    "sinonim": "nyata, hangat"
+  },
+  {
+    "kata": "Akurasi",
+    "sinonim": "ketelitian, kecermatan"
+  },
+  {
+    "kata": "Akurat",
+    "sinonim": "teliti, seksama, cermat"
+  },
+  {
+    "kata": "Aliansi",
+    "sinonim": "persekutuan, ikatan"
+  },
+  {
+    "kata": "Ambigu",
+    "sinonim": "bermakna lebih dari satu"
+  },
+  {
+    "kata": "Anonim",
+    "sinonim": "tanpa nama, tak beridentitas"
+  },
+  {
+    "kata": "Apatis",
+    "sinonim": "tidak peduli, acuh tak acuh"
+  },
+  {
+    "kata": "Arbitrer",
+    "sinonim": "sewenang-wenang"
+  },
+  {
+    "kata": "Aristokrat",
+    "sinonim": "bangsawan, ningrat"
+  },
+  {
+    "kata": "Arogan",
+    "sinonim": "congkak, sombong, angkuh"
+  },
+  {
+    "kata": "Artifisial",
+    "sinonim": "buatan, tidak alami"
+  },
+  {
+    "kata": "Blangko",
+    "sinonim": "kosong"
+  },
+  {
+    "kata": "Candu",
+    "sinonim": "adiktif"
+  },
+  {
+    "kata": "Definit",
+    "sinonim": "tertentu, pasti"
+  },
+  {
+    "kata": "Defisit",
+    "sinonim": "kekurangan"
+  },
+  {
+    "kata": "Degradasi",
+    "sinonim": "kemerosotan, kemunduran"
+  },
+  {
+    "kata": "Delik",
+    "sinonim": "tindak pidana"
+  },
+  {
+    "kata": "Delusi",
+    "sinonim": "khayal"
+  },
+  {
+    "kata": "Dependensi",
+    "sinonim": "ketergantungan"
+  },
+  {
+    "kata": "Depresi",
+    "sinonim": "stagnasi"
+  },
+  {
+    "kata": "Desalinasi",
+    "sinonim": "penyulingan, proses membuat air laut"
+  },
+  {
+    "kata": "Deskripsi",
+    "sinonim": "pemaparan, penggambaran"
+  },
+  {
+    "kata": "Destruktif",
+    "sinonim": "merusak, meghancurkan"
+  },
+  {
+    "kata": "Dinamis",
+    "sinonim": "penuh semangat"
+  },
+  {
+    "kata": "Doktrin",
+    "sinonim": "ajaran"
+  },
+  {
+    "kata": "Duplikat",
+    "sinonim": "replika, salinan, tiruan"
+  },
+  {
+    "kata": "Efisien",
+    "sinonim": "berdaya guna, tepat guna"
+  },
+  {
+    "kata": "Eksemplar",
+    "sinonim": "lembar, helai"
+  },
+  {
+    "kata": "Eksepsi",
+    "sinonim": "pengecualian"
+  },
+  {
+    "kata": "Eksodus",
+    "sinonim": "hijrah, mengungsi"
+  },
+  {
+    "kata": "Ekspansi",
+    "sinonim": "perluasan wilayah"
+  },
+  {
+    "kata": "Ekspedisi",
+    "sinonim": "pengiriman surat atau barang"
+  },
+  {
+    "kata": "Eksploitasi",
+    "sinonim": "pemanfaatan, pendayagunaan"
+  },
+  {
+    "kata": "Eksplorasi",
+    "sinonim": "pendalaman, penggalian, pengkajian"
+  },
+  {
+    "kata": "Ekspresi",
+    "sinonim": "ungkapan, pandangan air muka"
+  },
+  {
+    "kata": "Ekstra",
+    "sinonim": "tambahan, sangat luar biasa"
+  },
+  {
+    "kata": "Ekuilibrium",
+    "sinonim": "kesetimbangan"
+  },
+  {
+    "kata": "Ekuivalen",
+    "sinonim": "sama, sebanding"
+  },
+  {
+    "kata": "Elusif",
+    "sinonim": "sulit dipahami atau diartikan"
+  },
+  {
+    "kata": "Embargo",
+    "sinonim": "larangan"
+  },
+  {
+    "kata": "Entitas",
+    "sinonim": "satuan yang berwujud"
+  },
+  {
+    "kata": "Enumerasi",
+    "sinonim": "pencacahan, penjumlahan"
+  },
+  {
+    "kata": "Epilog",
+    "sinonim": "penutup"
+  },
+  {
+    "kata": "Esensi",
+    "sinonim": "hakikat"
+  },
+  {
+    "kata": "Eskalasi",
+    "sinonim": "kenaikan"
+  },
+  {
+    "kata": "Estetis",
+    "sinonim": "keindahan"
+  },
+  {
+    "kata": "Estimasi",
+    "sinonim": "perkiraan"
+  },
+  {
+    "kata": "Estuari",
+    "sinonim": "muara"
+  },
+  {
+    "kata": "Etika",
+    "sinonim": "akhlak"
+  },
+  {
+    "kata": "Etnis",
+    "sinonim": "etnik"
+  },
+  {
+    "kata": "Evakuasi",
+    "sinonim": "pemindahan"
+  },
+  {
+    "kata": "Evaluasi",
+    "sinonim": "penilaian"
+  },
+  {
+    "kata": "Evaporasi",
+    "sinonim": "penguapan"
+  },
+  {
+    "kata": "Evokasi",
+    "sinonim": "daya penggugah rasa"
+  },
+  {
+    "kata": "Evolusi",
+    "sinonim": "perubahan"
+  },
+  {
+    "kata": "Faksi",
+    "sinonim": "kelompok"
+  },
+  {
+    "kata": "Faktor",
+    "sinonim": "penyebab"
+  },
+  {
+    "kata": "Faktual",
+    "sinonim": "berdasarkan kenyataan"
+  },
+  {
+    "kata": "Fana",
+    "sinonim": "tidak kekal"
+  },
+  {
+    "kata": "Fatamorgana",
+    "sinonim": "khayal"
+  },
+  {
+    "kata": "Fenomena",
+    "sinonim": "gejala"
+  },
+  {
+    "kata": "Feodal",
+    "sinonim": "aristokrat"
+  },
+  {
+    "kata": "Fermentasi",
+    "sinonim": "peragian"
+  },
+  {
+    "kata": "Fiksi",
+    "sinonim": "khayalan, rekaan"
+  },
+  {
+    "kata": "Fiktif",
+    "sinonim": "bersifat fiksi"
+  },
+  {
+    "kata": "Fiskal",
+    "sinonim": "perpajakan"
+  },
+  {
+    "kata": "Friksi",
+    "sinonim": "perpecahan"
+  },
+  {
+    "kata": "Fusi",
+    "sinonim": "penggabungan"
+  },
+  {
+    "kata": "Gema",
+    "sinonim": "suara yang memantul"
+  },
+  {
+    "kata": "Grasi",
+    "sinonim": "pengampunan"
+  },
+  {
+    "kata": "Harmoni",
+    "sinonim": "keselarasan, keserasian"
+  },
+  {
+    "kata": "Heksagonal",
+    "sinonim": "segienam"
+  },
+  {
+    "kata": "Ideologi",
+    "sinonim": "paham, teori"
+  },
+  {
+    "kata": "Ikhtiar",
+    "sinonim": "daya, upaya"
+  },
+  {
+    "kata": "Ikhtisar",
+    "sinonim": "ringkasa"
+  },
+  {
+    "kata": "Imitasi",
+    "sinonim": "tiruan, bukan asli"
+  },
+  {
+    "kata": "Impilkasi",
+    "sinonim": "keterlibatan"
+  },
+  {
+    "kata": "Impuls",
+    "sinonim": "dorongan hati"
+  },
+  {
+    "kata": "Imun",
+    "sinonim": "kebal"
+  },
+  {
+    "kata": "Individualis",
+    "sinonim": "egois"
+  },
+  {
+    "kata": "Inferensi",
+    "sinonim": "kesimpula"
+  },
+  {
+    "kata": "Informal",
+    "sinonim": "tidak resmi"
+  },
+  {
+    "kata": "Inisiasi",
+    "sinonim": "upacara, meresmikan"
+  },
+  {
+    "kata": "Inklusif",
+    "sinonim": "termasuk,"
+  },
+  {
+    "kata": "Inovasi",
+    "sinonim": "pambaharuan"
+  },
+  {
+    "kata": "Inses",
+    "sinonim": "perkawinan antara dua orang yang bersaudara dekat"
+  },
+  {
+    "kata": "Inspeksi",
+    "sinonim": "pemeriksaan"
+  },
+  {
+    "kata": "Inspirasi",
+    "sinonim": "ilham"
+  },
+  {
+    "kata": "Instruksi",
+    "sinonim": "pelajaran, perunjuk"
+  },
+  {
+    "kata": "Integrasi",
+    "sinonim": "pembauran"
+  },
+  {
+    "kata": "Intelektual",
+    "sinonim": "cendekiawan, cerdas"
+  },
+  {
+    "kata": "Interogasi",
+    "sinonim": "pemeriksaan, pertanyaan"
+  },
+  {
+    "kata": "Interupsi",
+    "sinonim": "penyelaan, pemotongan"
+  },
+  {
+    "kata": "Interval",
+    "sinonim": "jangka nada"
+  },
+  {
+    "kata": "Intuisi",
+    "sinonim": "bisikan hati, gerakan hati"
+  },
+  {
+    "kata": "Intervensi",
+    "sinonim": "campur tangan"
+  },
+  {
+    "kata": "Iterasi",
+    "sinonim": "perulangan"
+  },
+  {
+    "kata": "Jurnal",
+    "sinonim": "surat kabar harian"
+  },
+  {
+    "kata": "Kaidah",
+    "sinonim": "patokan, aturan yang sudah pasti"
+  },
+  {
+    "kata": "Kalkulasi",
+    "sinonim": "perhitungan, perincian biaya"
+  },
+  {
+    "kata": "Kapitalis",
+    "sinonim": "kaum bermodal"
+  },
+  {
+    "kata": "Kitab",
+    "sinonim": "buku"
+  },
+  {
+    "kata": "Klan",
+    "sinonim": "suku, kelompok"
+  },
+  {
+    "kata": "Klasifikasi",
+    "sinonim": "pengelompokan menurut kaidah"
+  },
+  {
+    "kata": "Klimaks",
+    "sinonim": "puncak"
+  },
+  {
+    "kata": "Kognisi",
+    "sinonim": "pengenalan, penafsiran"
+  },
+  {
+    "kata": "Kolateral",
+    "sinonim": "paralel, sejalan, berdampingan, sejajar"
+  },
+  {
+    "kata": "Koloni",
+    "sinonim": "jajahan"
+  },
+  {
+    "kata": "Kompleksitas",
+    "sinonim": "kerumitan"
+  },
+  {
+    "kata": "Komplemen",
+    "sinonim": "pelengkap"
+  },
+  {
+    "kata": "Konfrontasi",
+    "sinonim": "permusuhan, pertentangan"
+  },
+  {
+    "kata": "Konkaf",
+    "sinonim": "cekung"
+  },
+  {
+    "kata": "Konklusi",
+    "sinonim": "kesimpulan"
+  },
+  {
+    "kata": "Konsesi",
+    "sinonim": "kerelaan"
+  },
+  {
+    "kata": "Konstitusi",
+    "sinonim": "undang-undang"
+  },
+  {
+    "kata": "Kontribusi",
+    "sinonim": "sumbangan"
+  },
+  {
+    "kata": "Konveks",
+    "sinonim": "cembung"
+  },
+  {
+    "kata": "Konvensional",
+    "sinonim": "tradisional"
+  },
+  {
+    "kata": "Laten",
+    "sinonim": "tersembunyi, terpendam"
+  },
+  {
+    "kata": "Majemuk",
+    "sinonim": "keanekaragaman"
+  },
+  {
+    "kata": "Makar",
+    "sinonim": "akal busuk, tipu muslihat"
+  },
+  {
+    "kata": "Makna",
+    "sinonim": "arti"
+  },
+  {
+    "kata": "Manuskrip",
+    "sinonim": "naskah"
+  },
+  {
+    "kata": "Masif",
+    "sinonim": "utuh, padat"
+  },
+  {
+    "kata": "Materialistis",
+    "sinonim": "bersifat kebendaan"
+  },
+  {
+    "kata": "Moderat",
+    "sinonim": "menghindari prilaku ekstrem"
+  },
+  {
+    "kata": "Monarki",
+    "sinonim": "kerajaan"
+  },
+  {
+    "kata": "Naluri",
+    "sinonim": "dorongan hati"
+  },
+  {
+    "kata": "Narasi",
+    "sinonim": "des"
+  },
+  {
+    "kata": "Navigasi",
+    "sinonim": "pelayaran"
+  },
+  {
+    "kata": "Nisbi",
+    "sinonim": "relat"
+  },
+  {
+    "kata": "Nomaden",
+    "sinonim": "berpinda"
+  },
+  {
+    "kata": "Nomenklatur",
+    "sinonim": "tata"
+  },
+  {
+    "kata": "atur",
+    "sinonim": "tata nama"
+  },
+  {
+    "kata": "Objektif",
+    "sinonim": "tidak dipengaruhi pendapat atau pandangan pribadi"
+  },
+  {
+    "kata": "Otoritas",
+    "sinonim": "kekuasaan, wewenang"
+  },
+  {
+    "kata": "Paradigma",
+    "sinonim": "kerangka berpikir"
+  },
+  {
+    "kata": "Paralel",
+    "sinonim": "sejajar"
+  },
+  {
+    "kata": "Pedagogi",
+    "sinonim": "ilmu pengajaran, ilmu pendidikan"
+  },
+  {
+    "kata": "Permisif",
+    "sinonim": "terbuka"
+  },
+  {
+    "kata": "Petisi",
+    "sinonim": "permohonan"
+  },
+  {
+    "kata": "Polemik",
+    "sinonim": "perdebatan"
+  },
+  {
+    "kata": "Presensi",
+    "sinonim": "kehadira"
+  },
+  {
+    "kata": "Preventif",
+    "sinonim": "mencegah"
+  },
+  {
+    "kata": "Prohibisi",
+    "sinonim": "larangan"
+  },
+  {
+    "kata": "Proletar",
+    "sinonim": "rakyat jelata"
+  },
+  {
+    "kata": "Prominen",
+    "sinonim": "terbuka"
+  },
+  {
+    "kata": "Propaganda",
+    "sinonim": "ajakan"
+  },
+  {
+    "kata": "Proporsi",
+    "sinonim": "perbandingan"
+  },
+  {
+    "kata": "Provokasi",
+    "sinonim": "penghasutan"
+  },
+  {
+    "kata": "Rancu",
+    "sinonim": "kacau"
+  },
+  {
+    "kata": "Referensi",
+    "sinonim": "rujukan, sumber acuan"
+  },
+  {
+    "kata": "Rehabilitasi",
+    "sinonim": "perbaikan, pemulihan"
+  },
+  {
+    "kata": "Reklamasi",
+    "sinonim": "bantahan, sanggahan"
+  },
+  {
+    "kata": "Rekonsiliasi",
+    "sinonim": "pemulihan hubungan"
+  },
+  {
+    "kata": "Reportase",
+    "sinonim": "pemberitaan, pelaporan"
+  },
+  {
+    "kata": "Resesi",
+    "sinonim": "kemunduran"
+  },
+  {
+    "kata": "Resistan",
+    "sinonim": "tahan terhadap penyakit"
+  },
+  {
+    "kata": "Revolusi",
+    "sinonim": "perubahan"
+  },
+  {
+    "kata": "Sedimentasi",
+    "sinonim": "pengendapan"
+  },
+  {
+    "kata": "Sekte",
+    "sinonim": "mazhab"
+  },
+  {
+    "kata": "Sinyalemen",
+    "sinonim": "peringatan, dugaan"
+  },
+  {
+    "kata": "Skeptis",
+    "sinonim": "ragu-ragu, kurang percaya"
+  },
+  {
+    "kata": "Spesifik",
+    "sinonim": "khusus, khas"
+  },
+  {
+    "kata": "Spiritual",
+    "sinonim": "bersifat kejiwaan"
+  },
+  {
+    "kata": "Sporadis",
+    "sinonim": "kadang-kadang, tidak tentu"
+  },
+  {
+    "kata": "Substansi",
+    "sinonim": "inti, unsur"
+  },
+  {
+    "kata": "Supremasi",
+    "sinonim": "kekuasaan tertinggi"
+  },
+  {
+    "kata": "Swasembada",
+    "sinonim": "usaha mencukupi kebutuhan sendiri"
+  },
+  {
+    "kata": "Tautologi",
+    "sinonim": "pengulangan"
+  },
+  {
+    "kata": "Tera",
+    "sinonim": "stempel"
+  },
+  {
+    "kata": "Termaktub",
+    "sinonim": "tertulis, tercantum"
+  },
+  {
+    "kata": "Transisi",
+    "sinonim": "peralihan"
+  },
+  {
+    "kata": "Validitas",
+    "sinonim": "kesahihan"
+  },
+  {
+    "kata": "Virulen",
+    "sinonim": "beracun, mematikan, jahat"
+  },
+  {
+    "kata": "Visual",
+    "sinonim": "berdasarkan penglihatan"
+  },
+  {
+    "kata": "Vital",
+    "sinonim": "sangat penting"
+  },
+  {
+    "kata": "Volunter",
+    "sinonim": "sukarelawan"
+  },
+  {
+    "kata": "Warkat",
+    "sinonim": "surat, isi surat"
+  },
+  {
+    "kata": "Mawas diri",
+    "sinonim": "instrospeksi"
+  },
+  {
+    "kata": "Yurisdiksi",
+    "sinonim": "kekuasaan mengadili"
+  }
+]
