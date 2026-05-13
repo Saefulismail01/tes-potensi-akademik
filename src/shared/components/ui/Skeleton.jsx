@@ -1,8 +1,5 @@
-export default function Skeleton({ className = '', height = '1rem' }) {
+export default function Skeleton({ className = '' }) {
   return (
-    <div
-      className={`animate-pulse rounded-lg bg-gradient-to-r from-gray-100 to-gray-200 ${className}`}
-      style={{ height }}
-    />
+    <div className={`animate-pulse rounded-xl bg-hairline-soft ${className}`} />
   )
 }

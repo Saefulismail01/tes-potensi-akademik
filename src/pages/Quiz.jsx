@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
+import Card from '../components/Card'
 import Timer from '../components/Timer'
 import Button from '../shared/components/ui/Button'
 import PackagePicker from '../shared/components/PackagePicker'
@@ -69,18 +70,18 @@ export default function Quiz() {
   if (selesai) {
     const persen = Math.round((benar / soal.length) * 100)
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] animate-fade-in-up">
-        <div className="text-6xl mb-4">{persen >= 70 ? '🎉' : persen >= 50 ? '😊' : '📚'}</div>
-        <h2 className="text-xl font-bold mb-1">Quiz Selesai!</h2>
-        <p className="text-gray-400 text-sm mb-6">{persen}% benar — {timer.seconds}s</p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] animate-scale-in">
+        <div className="text-5xl mb-4">{persen >= 70 ? '🎉' : persen >= 50 ? '😊' : '📚'}</div>
+        <h2 className="text-xl font-semibold tracking-tight text-ink mb-1">Quiz Selesai!</h2>
+        <p className="text-slate text-sm mb-6">{persen}% benar — {Math.floor(timer.seconds / 60)}:{String(timer.seconds % 60).padStart(2, '0')}</p>
         <div className="grid grid-cols-2 gap-3 w-full max-w-xs mb-6">
-          <div className="bg-emerald-50 rounded-2xl p-4 text-center">
-            <p className="text-2xl font-bold text-emerald-600">{benar}</p>
-            <p className="text-xs text-emerald-500">Benar</p>
+          <div className="bg-[var(--color-tint-mint)] rounded-xl p-4 text-center border border-tint-mint">
+            <p className="text-2xl font-bold" style={{ color: 'var(--color-success)' }}>{benar}</p>
+            <p className="text-xs text-slate">Benar</p>
           </div>
-          <div className="bg-red-50 rounded-2xl p-4 text-center">
-            <p className="text-2xl font-bold text-red-500">{salah}</p>
-            <p className="text-xs text-red-500">Salah</p>
+          <div className="bg-[var(--color-tint-rose)] rounded-xl p-4 text-center border border-tint-rose">
+            <p className="text-2xl font-bold text-error">{salah}</p>
+            <p className="text-xs text-slate">Salah</p>
           </div>
         </div>
         <div className="flex gap-3">
@@ -92,39 +93,36 @@ export default function Quiz() {
   }
 
   return (
-    <div className="animate-fade-in-up">
+    <div className="animate-fade-in">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h2 className="text-xl font-bold tracking-tight">{paket.name}</h2>
-          <p className="text-xs text-gray-400 uppercase tracking-wider">Quiz</p>
+          <h2 className="text-xl font-semibold tracking-tight text-ink">{paket.name}</h2>
+          <p className="text-xs text-slate uppercase tracking-wider mt-0.5">Quiz</p>
         </div>
         <Timer seconds={timer.seconds} running={timer.running} start={timer.start} pause={timer.pause} reset={timer.reset} />
       </div>
 
-      <div className="w-full bg-gray-100 rounded-full h-1.5 mb-6">
-        <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 h-1.5 rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
+      <div className="h-1.5 bg-hairline rounded-full mb-6 overflow-hidden">
+        <div className="bg-primary h-full rounded-full transition-all duration-300" style={{ width: `${progress}%` }} />
       </div>
 
-      <p className="text-xs text-gray-400 mb-6">
-        Soal {soalIndex + 1} dari {soal.length}
-      </p>
+      <p className="text-xs text-slate mb-5">Soal {soalIndex + 1} dari {soal.length}</p>
 
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 mb-6 shadow-sm">
-        <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">Pilih sinonim dari</p>
-        <p className="text-2xl font-bold text-indigo-600">"{current.kata}"</p>
+      <div className="rounded-xl bg-canvas border border-hairline shadow-card p-6 mb-6 text-center">
+        <p className="text-xl font-semibold text-ink-deep">{current.kata}</p>
       </div>
 
       <div className="grid gap-2.5">
         {pilihan.map((p, i) => {
-          let cls = 'border-gray-100 bg-white hover:border-indigo-200 hover:bg-indigo-50/30'
+          let cls = 'border-hairline bg-canvas hover:shadow-card-hover'
           if (jawaban !== null) {
-            if (p === current.jawaban) cls = 'border-emerald-300 bg-emerald-50'
-            else if (p === jawaban) cls = 'border-red-300 bg-red-50'
-            else cls = 'border-gray-100 bg-white/50'
+            if (p === current.jawaban) cls = 'border-[var(--color-success)] bg-tint-mint'
+            else if (p === jawaban) cls = 'border-error bg-[var(--color-tint-rose)]'
+            else cls = 'border-hairline bg-canvas opacity-50'
           }
           return (
             <button key={i} onClick={() => handlePilih(p)}
-              className={`w-full text-left p-4 rounded-2xl border-2 transition-all duration-200 ${cls}`}
+              className={`w-full text-left p-4 rounded-lg border text-sm transition-all duration-150 ${cls}`}
               disabled={jawaban !== null}>
               {p}
             </button>

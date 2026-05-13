@@ -3,22 +3,20 @@ export default function Timer({ seconds, running, start, pause, reset, className
   const s = String(seconds % 60).padStart(2, '0')
 
   return (
-    <div className={`flex items-center gap-2.5 font-mono text-sm ${className}`}>
-      <span className="tabular-nums font-bold tracking-wider">
-        <span className="text-gray-400 text-[10px] uppercase tracking-wider mr-1">Waktu</span>
-        <span className={running && seconds > 0 ? 'text-red-500' : 'text-gray-600'}>
-          {m}:{s}
-        </span>
+    <div className={`inline-flex items-center gap-2 ${className}`}>
+      <span className="text-sm font-mono font-medium tracking-tight">
+        <span className="text-xs text-slate font-normal mr-1">Waktu</span>
+        <span className={running ? 'text-error' : 'text-ink'}>{m}:{s}</span>
       </span>
       <div className="flex gap-1.5">
         {!running && seconds === 0 && (
-          <button onClick={start} className="px-3 py-1 rounded-lg bg-indigo-600 text-white text-xs font-medium hover:bg-indigo-700 transition">Mulai</button>
+          <button onClick={start} className="px-2.5 py-1 rounded-lg text-xs font-medium bg-primary text-white transition-colors hover:bg-[var(--color-primary-pressed)]">Mulai</button>
         )}
         {running && (
-          <button onClick={pause} className="px-3 py-1 rounded-lg bg-amber-500 text-white text-xs font-medium hover:bg-amber-600 transition">Jeda</button>
+          <button onClick={pause} className="px-2.5 py-1 rounded-lg text-xs font-medium bg-warning text-white transition-colors hover:bg-amber-600">Jeda</button>
         )}
         {!running && seconds > 0 && (
-          <button onClick={reset} className="px-3 py-1 rounded-lg bg-gray-200 text-gray-600 text-xs font-medium hover:bg-gray-300 transition">Reset</button>
+          <button onClick={reset} className="px-2.5 py-1 rounded-lg text-xs font-medium bg-surface text-slate border border-hairline-strong transition-colors hover:bg-hairline">Reset</button>
         )}
       </div>
     </div>

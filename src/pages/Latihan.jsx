@@ -1,7 +1,9 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
 import paketList from '../data/paket'
-import { trackMistake } from '../data/stats'
+import ProgressBar from '../shared/components/ui/ProgressBar'
+import Button from '../shared/components/ui/Button'
 import PackagePicker from '../shared/components/PackagePicker'
+import { trackMistake } from './../data/stats'
 
 function shuffle(arr) {
   const a = [...arr]
@@ -14,11 +16,7 @@ function shuffle(arr) {
 
 function pickPilihan(current, allData) {
   const b = current.jawaban
-  const lain = allData
-    .filter((d) => d.jawaban !== b)
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 3)
-    .map((d) => d.jawaban)
+  const lain = allData.filter((d) => d.jawaban !== b).sort(() => Math.random() - 0.5).slice(0, 3).map((d) => d.jawaban)
   return shuffle([b, ...lain])
 }
 
@@ -26,9 +24,7 @@ function storageKey(paketId) { return `paps_latihan_${paketId}` }
 
 function toIndices(arr, data) { return arr.map((q) => data.indexOf(q)) }
 
-function fromIndices(indices, data) {
-  return indices.map((i) => data[i]).filter(Boolean)
-}
+function fromIndices(indices, data) { return indices.map((i) => data[i]).filter(Boolean) }
 
 function loadState(paketId, data) {
   try {
@@ -43,9 +39,7 @@ function loadState(paketId, data) {
 }
 
 function saveState(paketId, round, pool, missed, index, totalBenar, totalSalah, selesai, dataRef) {
-  try {
-    localStorage.setItem(storageKey(paketId), JSON.stringify({ round, pool: toIndices(pool, dataRef), missed: toIndices(missed, dataRef), index, totalBenar, totalSalah, selesai }))
-  } catch {}
+  try { localStorage.setItem(storageKey(paketId), JSON.stringify({ round, pool: toIndices(pool, dataRef), missed: toIndices(missed, dataRef), index, totalBenar, totalSalah, selesai })) } catch {}
 }
 
 function clearState(paketId) { try { localStorage.removeItem(storageKey(paketId)) } catch {} }
@@ -53,20 +47,17 @@ function clearState(paketId) { try { localStorage.removeItem(storageKey(paketId)
 export default function Latihan() {
   const [paket, setPaket] = useState(null)
   const [data, setData] = useState(null)
-
   function pilih(p) { setPaket(p); setData(p.data) }
 
   return (
-    <div className="animate-fade-in-up">
+    <div className="animate-fade-in">
       {!paket ? <PackagePicker mode="latihan" onPilih={pilih} /> : <LatihanContent paket={paket} data={data} onGanti={() => { setPaket(null); setData(null) }} />}
     </div>
   )
 }
 
 function LatihanContent({ paket, data, onGanti }) {
-  const dataRef = useRef(data)
-  dataRef.current = data
-
+  const dataRef = useRef(data); dataRef.current = data
   const init = useRef(true)
   const saved = useRef(null)
   if (saved.current === null && data) saved.current = loadState(paket.id, data)
@@ -104,19 +95,25 @@ function LatihanContent({ paket, data, onGanti }) {
     } else { setIndex((i) => i + 1); setJawaban(null) }
   }
 
-  useEffect(() => { if (!current) return; if (jawaban !== current.jawaban) return; const t = setTimeout(advance, 800); return () => clearTimeout(t) }, [jawaban, current])
+  useEffect(() => { if (!current || jawaban !== current.jawaban) return; const t = setTimeout(advance, 800); return () => clearTimeout(t) }, [jawaban, current])
 
   function restart() { clearState(paket.id); setRound(1); setPool(shuffle(data)); missedRef.current = []; setMissedCount(0); setIndex(0); setJawaban(null); setTotalBenar(0); setTotalSalah(0); setSelesai(false) }
 
   if (selesai) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] animate-fade-in-up">
-        <div className="text-6xl mb-4">🎯</div>
-        <h2 className="text-xl font-bold mb-1">Latihan Selesai!</h2>
-        <p className="text-gray-400 text-sm mb-6">Semua soal dikerjakan dengan benar ✓</p>
+      <div className="flex flex-col items-center justify-center min-h-[60vh] animate-scale-in">
+        <div className="text-5xl mb-4">🎯</div>
+        <h2 className="text-xl font-semibold tracking-tight text-ink mb-1">Latihan Selesai!</h2>
+        <p className="text-slate text-sm mb-6">Semua soal terjawab dengan benar ✓</p>
         <div className="grid grid-cols-2 gap-3 w-full max-w-xs mb-6">
-          <div className="bg-emerald-50 rounded-2xl p-4 text-center"><p className="text-2xl font-bold text-emerald-600">{totalBenar}</p><p className="text-xs text-emerald-500">Benar</p></div>
-          <div className="bg-red-50 rounded-2xl p-4 text-center"><p className="text-2xl font-bold text-red-500">{totalSalah}</p><p className="text-xs text-red-500">Terulang</p></div>
+          <div className="bg-tint-mint rounded-xl p-4 text-center">
+            <p className="text-2xl font-bold" style={{ color: 'var(--color-success)' }}>{totalBenar}</p>
+            <p className="text-xs text-slate">Benar</p>
+          </div>
+          <div className="bg-[var(--color-tint-rose)] rounded-xl p-4 text-center">
+            <p className="text-2xl font-bold text-error">{totalSalah}</p>
+            <p className="text-xs text-slate">Terulang</p>
+          </div>
         </div>
         <div className="flex gap-3">
           <Button onClick={restart}>Latihan Lagi</Button>
@@ -132,40 +129,49 @@ function LatihanContent({ paket, data, onGanti }) {
     <div>
       <div className="flex items-center justify-between mb-2">
         <div>
-          <h2 className="text-xl font-bold tracking-tight">{paket.name}</h2>
-          <p className="text-xs text-gray-400 uppercase tracking-wider">Latihan</p>
+          <h2 className="text-xl font-semibold tracking-tight text-ink">{paket.name}</h2>
+          <p className="text-xs text-slate uppercase tracking-wider mt-0.5">Latihan</p>
         </div>
-        <button onClick={onGanti} className="text-xs text-gray-400 hover:text-indigo-500 transition">Ganti Paket</button>
+        <button onClick={onGanti} className="text-xs text-slate hover:text-ink transition-colors">Ganti Paket</button>
       </div>
 
-      <div className="flex items-center justify-between text-sm text-gray-400 mb-6">
+      <div className="flex items-center justify-between text-sm text-slate mb-4">
         <span>Ronde {round}</span>
-        <span className="flex items-center gap-1">
-          <span className="text-emerald-500">✓ {totalBenar}</span>
-          <span className="text-gray-300">/</span>
-          <span className="text-red-400">✗ {totalSalah}</span>
+        <span className="flex items-center gap-1.5">
+          <span style={{ color: 'var(--color-success)' }}>✓ {totalBenar}</span>
+          <span className="text-hairline-strong">/</span>
+          <span className="text-error">✗ {totalSalah}</span>
         </span>
       </div>
 
-      <ProgressBar value={((index + 1) / pool.length) * 100} size="sm" className="mb-6" />
+      <ProgressBar value={((index + 1) / pool.length) * 100} size="sm" className="mb-5" />
 
-      <div className="bg-white rounded-2xl border border-gray-100 p-6 mb-6 shadow-sm">
-        <p className="text-xs text-gray-400 uppercase tracking-wider mb-2">Berikut sinonim dari</p>
-        <p className="text-2xl font-bold text-indigo-600">{current.kata}</p>
+      <div className="rounded-xl bg-canvas border border-hairline shadow-card p-6 mb-5 text-center">
+        <p className="text-xl font-semibold text-ink-deep">{current.kata}</p>
       </div>
 
       <div className="grid gap-2.5">
         {pilihan.map((p, i) => {
-          let cls = 'border-gray-100 bg-white hover:border-indigo-200 hover:bg-indigo-50/30'
-          if (jawaban !== null) { if (p === current.jawaban) cls = 'border-emerald-300 bg-emerald-50'; else if (p === jawaban) cls = 'border-red-300 bg-red-50'; else cls = 'border-gray-100 bg-white/50' }
-          return (<button key={i} onClick={() => handlePilih(p)} className={`w-full text-left p-4 rounded-2xl border-2 transition-all duration-200 ${cls}`} disabled={jawaban !== null}>{p}</button>)
+          let cls = 'border-hairline bg-canvas hover:shadow-card-hover'
+          if (jawaban !== null) {
+            if (p === current.jawaban) cls = 'border-[var(--color-success)] bg-tint-mint'
+            else if (p === jawaban) cls = 'border-error bg-[var(--color-tint-rose)]'
+            else cls = 'border-hairline bg-canvas opacity-50'
+          }
+          return (
+            <button key={i} onClick={() => handlePilih(p)}
+              className={`w-full text-left p-4 rounded-lg border text-sm transition-all duration-150 ${cls}`}
+              disabled={jawaban !== null}>
+              {p}
+            </button>
+          )
         })}
       </div>
 
       {jawaban !== null && (
-        <div className="text-center mt-6">
+        <div className="text-center mt-5">
           {jawaban === current.jawaban ? (
-            <p className="text-sm text-gray-400">Soal selanjutnya...</p>
+            <p className="text-sm text-slate">Soal selanjutnya...</p>
           ) : (
             <Button onClick={advance}>Lanjut →</Button>
           )}
