@@ -15,7 +15,7 @@ export default function AppLayout({ children }) {
       {/* Top Navigation — Notion-style sticky white bar */}
       <nav className="sticky top-0 z-40 bg-canvas border-b border-hairline">
         <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="font-bold text-lg tracking-tight" style={{ color: 'var(--color-ink-deep)' }}>
+          <Link to="/" className="font-bold text-lg tracking-tight text-ink-deep">
             PAPS
           </Link>
           <div className="flex items-center gap-1">

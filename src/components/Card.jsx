@@ -13,9 +13,9 @@ export default function Card({ kata, jawaban }) {
             <p className="text-xl font-semibold text-ink-deep">{kata}</p>
           </div>
           {/* Back */}
-          <div className="absolute inset-0 rounded-xl bg-tint-lavender border border-primary/10 flex flex-col items-center justify-center p-8 backface-hidden rotate-x-180">
-            <p className="text-xs font-medium uppercase tracking-wider mb-2" style={{ color: 'var(--color-primary)' }}>Jawaban</p>
-            <p className="text-lg font-semibold" style={{ color: 'var(--color-primary)' }}>{jawaban}</p>
+          <div className="absolute inset-0 rounded-xl bg-tint-lavender flex flex-col items-center justify-center p-8 backface-hidden rotate-x-180">
+            <p className="text-xs font-medium uppercase tracking-wider mb-2 text-primary">Jawaban</p>
+            <p className="text-lg font-semibold text-primary">{jawaban}</p>
           </div>
         </div>
       </div>
