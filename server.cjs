@@ -42,5 +42,6 @@ http.createServer((req, res) => {
     res.end(data);
   });
 }).listen(PORT, '0.0.0.0', () => {
+  require('fs').writeFileSync('/tmp/paps-server.pid', String(process.pid));
   console.log(`PAPS server running on http://0.0.0.0:${PORT}`);
 });
