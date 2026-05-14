@@ -13,6 +13,14 @@ const useProgressStore = create(
   persist(
     (set, get) => ({
       pakets: {},
+      quizHighScore: { level: 0, score: 0, streak: 0, totalBenar: 0, totalSalah: 0 },
+
+      updateQuizHighScore(score, level, streak) {
+        const current = get().quizHighScore
+        if (score > current.score) {
+          set({ quizHighScore: { level, score, streak } })
+        }
+      },
 
       _ensure(paketId) {
         if (!get().pakets[paketId]) {

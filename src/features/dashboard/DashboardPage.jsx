@@ -4,9 +4,11 @@ import ModeCard from './components/ModeCard'
 import MasteryOverview from './components/MasteryOverview'
 import WeakWordsList from './components/WeakWordsList'
 
+const LEVEL_NAMES = ['', 'Pemula', 'Pelajar', 'Mahasiswa', 'Sarjana', 'Magister', 'Doktor']
+
 const modes = [
   { to: '/flashcard', title: 'Flashcard', desc: 'Baca dan hafal dengan kartu', icon: '📇' },
-  { to: '/quiz', title: 'Quiz', desc: 'Uji kemampuan dengan timer', icon: '⏱️' },
+  { to: '/quiz', title: 'Quiz', desc: 'Level + streak + countdown', icon: '⏱️' },
   { to: '/latihan', title: 'Latihan', desc: 'Ronde berulang sampai semua benar', icon: '✍️' },
   { to: '/review', title: 'Review', desc: 'Fokus di kata yang sering salah', icon: '🔄' },
 ]
@@ -15,13 +17,14 @@ export default function DashboardPage() {
   const getWeakWords = useProgressStore((s) => s.getWeakWords)
   const getMastery = useProgressStore((s) => s.getMastery)
   const pakets = useProgressStore((s) => s.pakets)
+  const quizHighScore = useProgressStore((s) => s.quizHighScore)
 
   const weak = paketList[0] ? getWeakWords(paketList[0].id, 10) : []
 
   return (
     <div className="animate-fade-in">
       {/* Hero greeting */}
-      <div className="mb-8">
+      <div className="mb-6">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-ink-deep">
           Selamat belajar, Pejuang TPA
         </h1>
@@ -29,6 +32,19 @@ export default function DashboardPage() {
           Platform Akademik Penalaran Verbal
         </p>
       </div>
+
+      {/* High Score */}
+      {quizHighScore.score > 0 && (
+        <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-4 mb-6 flex items-center gap-4">
+          <span className="text-3xl">🏆</span>
+          <div>
+            <p className="text-sm font-semibold text-yellow-800">High Score Quiz</p>
+            <p className="text-xs text-yellow-700">
+              Skor {quizHighScore.score} · Level {quizHighScore.level} ({LEVEL_NAMES[quizHighScore.level]}) · 🔥 Streak {quizHighScore.streak}
+            </p>
+          </div>
+        </div>
+      )}
 
       {/* Mode cards */}
       <div className="grid gap-2.5 mb-8">

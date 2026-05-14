@@ -1,13 +1,30 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 
-export default function useTimer(initialSeconds = 0) {
-  const [seconds, setSeconds] = useState(initialSeconds)
+export default function useTimer(initialSeconds = 30, onTimeout) {
+  const [remaining, setRemaining] = useState(initialSeconds)
   const [running, setRunning] = useState(false)
   const ref = useRef(null)
+  const onTimeoutRef = useRef(onTimeout)
+  onTimeoutRef.current = onTimeout
+
+  useEffect(() => {
+    setRemaining(initialSeconds)
+  }, [initialSeconds])
 
   const start = useCallback(() => {
     if (ref.current) return
-    ref.current = setInterval(() => setSeconds((s) => s + 1), 1000)
+    ref.current = setInterval(() => {
+      setRemaining(prev => {
+        if (prev <= 1) {
+          clearInterval(ref.current)
+          ref.current = null
+          setRunning(false)
+          onTimeoutRef.current?.()
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
     setRunning(true)
   }, [])
 
@@ -17,12 +34,12 @@ export default function useTimer(initialSeconds = 0) {
     setRunning(false)
   }, [])
 
-  const reset = useCallback(() => {
+  const reset = useCallback((newSeconds) => {
     clearInterval(ref.current)
     ref.current = null
-    setSeconds(0)
+    setRemaining(newSeconds ?? initialSeconds)
     setRunning(false)
-  }, [])
+  }, [initialSeconds])
 
-  return { seconds, running, start, pause, reset }
+  return { remaining, running, start, pause, reset }
 }
