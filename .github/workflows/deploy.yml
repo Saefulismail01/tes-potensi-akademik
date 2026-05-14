@@ -22,5 +22,6 @@ jobs:
             git pull origin main
             npm ci
             npm run build
-            pkill -f "node server.cjs" || true
+            kill $(cat /tmp/paps-server.pid 2>/dev/null) 2>/dev/null || true
             nohup node server.cjs > /tmp/paps-server.log 2>&1 &
+            echo $! > /tmp/paps-server.pid
