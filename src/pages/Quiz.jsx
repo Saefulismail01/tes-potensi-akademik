@@ -82,8 +82,6 @@ export default function Quiz() {
     return shuffle([b, ...lain])
   }, [current, data])
 
-  const existingCp = loadCP()
-
   function startGame(p, fromCheckpoint) {
     setPaket(p)
     setData(p.data)
@@ -104,6 +102,20 @@ export default function Quiz() {
     setWrongList([]); setPool(shuffled); setShowBonus(null); clearCP()
     setPhase('play')
   }
+
+  function handlePilihPaket(p) {
+    setPaket(p)
+    setData(p.data)
+    const cp = loadCP()
+    if (cp && cp.paketId === p.id) {
+      setPhase('prompt')
+    } else {
+      startGame(p, false)
+    }
+  }
+
+  function handleResume() { startGame(paket, true) }
+  function handleFreshStart() { clearCP(); startGame(paket, false) }
 
   useEffect(() => {
     if (phase === 'play' && !timer.running && soalIndex === 0) timer.start()
@@ -196,27 +208,29 @@ export default function Quiz() {
 
   // ——— PICK phase —
   if (phase === 'pick') {
+    return <PackagePicker mode="quiz" onPilih={handlePilihPaket} />
+  }
+
+  // ——— PROMPT phase —
+  if (phase === 'prompt') {
     const cp = loadCP()
-    if (cp) {
-      const hs = quizHighScore[cp.jenis === 'antonim' ? 'antonim' : 'sinonim']
-      const found = paketList.find(p => p.id === cp.paketId)
-      return (
-        <div className="animate-fade-in flex flex-col items-center justify-center min-h-[50vh]">
-          <div className="text-5xl mb-4">📦</div>
-          <h2 className="text-xl font-semibold tracking-tight text-ink mb-1">Lanjutkan Quiz?</h2>
-          <p className="text-slate text-sm mb-1">Level {cp.level} ({LEVELS[cp.level - 1].name})</p>
-          <p className="text-xs text-slate mb-6">❤️ 3 · Skor {cp.score}</p>
-          <div className="flex gap-3 mb-8">
-            <Button onClick={() => found && startGame(found, true)} disabled={!found}>Lanjut</Button>
-            <Button variant="secondary" onClick={() => { clearCP(); setPhase('pick') }}>Mulai Baru</Button>
-          </div>
-          {hs && hs.score > 0 && (
-            <p className="text-xs text-yellow-700">🏆 High Score: {hs.score} · Level {hs.level} ({LEVELS[hs.level - 1]?.name})</p>
-          )}
+    const hs = quizHighScore[paket.jenis === 'antonim' ? 'antonim' : 'sinonim']
+    return (
+      <div className="animate-fade-in flex flex-col items-center justify-center min-h-[50vh]">
+        <div className="text-5xl mb-4">📦</div>
+        <h2 className="text-xl font-semibold tracking-tight text-ink mb-1">Lanjutkan Quiz?</h2>
+        <p className="text-slate text-sm mb-1">{paket.name} — Level {cp.level} ({LEVELS[cp.level - 1].name})</p>
+        <p className="text-xs text-slate mb-6">❤️ 3 · Skor {cp.score}</p>
+        <div className="flex gap-3 mb-8">
+          <Button onClick={handleResume}>Lanjut</Button>
+          <Button variant="secondary" onClick={handleFreshStart}>Mulai Baru</Button>
+          <Button variant="ghost" onClick={goHome}>Kembali</Button>
         </div>
-      )
-    }
-    return <PackagePicker mode="quiz" onPilih={p => startGame(p, false)} />
+        {hs && hs.score > 0 && (
+          <p className="text-xs text-yellow-700">🏆 High Score: {hs.score} · Level {hs.level} ({LEVELS[hs.level - 1]?.name})</p>
+        )}
+      </div>
+    )
   }
 
   // ——— LEVEL UP phase —
@@ -249,8 +263,8 @@ export default function Quiz() {
           </div>
         )}
         <div className="flex gap-3">
-          {cp && <Button onClick={() => startGame(paket, true)}>Lanjut (3 ❤️)</Button>}
-          <Button variant="secondary" onClick={() => startGame(paket, false)}>Mulai Awal</Button>
+          {cp && <Button onClick={handleResume}>Lanjut (3 ❤️)</Button>}
+          <Button variant="secondary" onClick={handleFreshStart}>Mulai Awal</Button>
           <Button variant="ghost" onClick={goHome}>Beranda</Button>
         </div>
       </div>
@@ -265,7 +279,7 @@ export default function Quiz() {
       <p className="text-slate text-sm mb-2">Skor akhir: {score}</p>
       <p className="text-xs text-slate mb-6">✅ {totalBenar} · ❌ {totalSalah}</p>
       <div className="flex gap-3">
-        <Button onClick={() => startGame(paket, false)}>Main Lagi</Button>
+        <Button onClick={handleFreshStart}>Main Lagi</Button>
         <Button variant="secondary" onClick={goHome}>Beranda</Button>
       </div>
     </div>
