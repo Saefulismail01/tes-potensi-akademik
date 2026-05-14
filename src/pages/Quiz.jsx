@@ -1,9 +1,10 @@
-import { useState, useMemo, useEffect, useCallback, useRef } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import Timer from '../components/Timer'
 import Button from '../shared/components/ui/Button'
 import PackagePicker from '../shared/components/PackagePicker'
 import useTimer from '../hooks/useTimer'
 import useProgressStore from '../stores/useProgressStore'
+import paketList from '../data/paket'
 
 const LEVELS = [
   { num: 1, name: 'Pemula', time: 20 },
@@ -37,6 +38,7 @@ function clearCP() { localStorage.removeItem('quiz_cp') }
 export default function Quiz() {
   const recordAnswer = useProgressStore(s => s.recordAnswer)
   const updateHighScore = useProgressStore(s => s.updateQuizHighScore)
+  const quizHighScore = useProgressStore(s => s.quizHighScore)
 
   const [phase, setPhase] = useState('pick')
   const [paket, setPaket] = useState(null)
@@ -52,6 +54,7 @@ export default function Quiz() {
   const [wrongList, setWrongList] = useState([])
   const [pool, setPool] = useState([])
   const [showBonus, setShowBonus] = useState(null)
+  const [showExitConfirm, setShowExitConfirm] = useState(false)
 
   const levelCfg = LEVELS[level - 1]
 
@@ -79,6 +82,8 @@ export default function Quiz() {
     return shuffle([b, ...lain])
   }, [current, data])
 
+  const existingCp = loadCP()
+
   function startGame(p, fromCheckpoint) {
     setPaket(p)
     setData(p.data)
@@ -87,7 +92,7 @@ export default function Quiz() {
     if (fromCheckpoint) {
       const cp = loadCP()
       if (cp) {
-        setLevel(cp.level); setLives(cp.lives); setStreak(cp.streak)
+        setLevel(cp.level); setLives(3); setStreak(cp.streak)
         setScore(cp.score); setTotalBenar(cp.benar); setTotalSalah(cp.salah)
         setSoalIndex(0); setJawaban(null); setWrongList([]); setPool(shuffled); setShowBonus(null)
         setPhase('play')
@@ -140,14 +145,12 @@ export default function Quiz() {
 
     if (isTimeout) handleWrong(true)
 
-    // isTimeout → lives blom diminus (masih closure pre-decrement)
-    // isWrong via handlePilih → lives udah diminus (closure post-decrement)
     const livesLeft = isTimeout ? lives - 1 : lives
 
     const t = setTimeout(() => {
       if (livesLeft <= 0) {
         timer.pause()
-        updateHighScore(score, level, streak)
+        updateHighScore(score, level, streak, paket.jenis)
         setPhase('gameOver')
         return
       }
@@ -155,11 +158,11 @@ export default function Quiz() {
       if (isLast) {
         timer.pause()
         if (level >= LEVELS.length) {
-          updateHighScore(score, level, streak)
+          updateHighScore(score, level, streak, paket.jenis)
           setPhase('allClear')
         } else {
           if (checkpointLevels.includes(level)) {
-            saveCP({ level: level + 1, lives: livesLeft, streak, score, benar: totalBenar, salah: totalSalah })
+            saveCP({ paketId: paket.id, paketName: paket.name, jenis: paket.jenis, level: level + 1, lives: livesLeft, streak, score, benar: totalBenar, salah: totalSalah })
           }
           setPhase('levelUp')
         }
@@ -182,12 +185,41 @@ export default function Quiz() {
     setPhase('play')
   }
 
-  function restartFromCheckpoint() { startGame(paket, true) }
-  function restartFromAwal() { startGame(paket, false) }
+  function handleExit() {
+    clearCP()
+    setShowExitConfirm(false)
+    setPaket(null)
+    setPhase('pick')
+  }
+
   function goHome() { setPaket(null); setPhase('pick') }
 
-  if (phase === 'pick') return <PackagePicker mode="quiz" onPilih={p => startGame(p, false)} />
+  // ——— PICK phase —
+  if (phase === 'pick') {
+    const cp = loadCP()
+    if (cp) {
+      const hs = quizHighScore[cp.jenis === 'antonim' ? 'antonim' : 'sinonim']
+      const found = paketList.find(p => p.id === cp.paketId)
+      return (
+        <div className="animate-fade-in flex flex-col items-center justify-center min-h-[50vh]">
+          <div className="text-5xl mb-4">📦</div>
+          <h2 className="text-xl font-semibold tracking-tight text-ink mb-1">Lanjutkan Quiz?</h2>
+          <p className="text-slate text-sm mb-1">Level {cp.level} ({LEVELS[cp.level - 1].name})</p>
+          <p className="text-xs text-slate mb-6">❤️ 3 · Skor {cp.score}</p>
+          <div className="flex gap-3 mb-8">
+            <Button onClick={() => found && startGame(found, true)} disabled={!found}>Lanjut</Button>
+            <Button variant="secondary" onClick={() => { clearCP(); setPhase('pick') }}>Mulai Baru</Button>
+          </div>
+          {hs && hs.score > 0 && (
+            <p className="text-xs text-yellow-700">🏆 High Score: {hs.score} · Level {hs.level} ({LEVELS[hs.level - 1]?.name})</p>
+          )}
+        </div>
+      )
+    }
+    return <PackagePicker mode="quiz" onPilih={p => startGame(p, false)} />
+  }
 
+  // ——— LEVEL UP phase —
   if (phase === 'levelUp') return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] animate-scale-in text-center">
       <div className="text-5xl mb-4">🎉</div>
@@ -197,6 +229,7 @@ export default function Quiz() {
     </div>
   )
 
+  // ——— GAME OVER phase —
   if (phase === 'gameOver') {
     const cp = loadCP()
     return (
@@ -216,14 +249,15 @@ export default function Quiz() {
           </div>
         )}
         <div className="flex gap-3">
-          {cp && <Button onClick={restartFromCheckpoint}>Lanjut dari Level {cp.level} ({cp.lives} ❤️)</Button>}
-          <Button variant="secondary" onClick={restartFromAwal}>Mulai Awal</Button>
+          {cp && <Button onClick={() => startGame(paket, true)}>Lanjut (3 ❤️)</Button>}
+          <Button variant="secondary" onClick={() => startGame(paket, false)}>Mulai Awal</Button>
           <Button variant="ghost" onClick={goHome}>Beranda</Button>
         </div>
       </div>
     )
   }
 
+  // ——— ALL CLEAR phase —
   if (phase === 'allClear') return (
     <div className="flex flex-col items-center justify-center min-h-[60vh] animate-scale-in text-center">
       <div className="text-5xl mb-4">🏆</div>
@@ -231,12 +265,26 @@ export default function Quiz() {
       <p className="text-slate text-sm mb-2">Skor akhir: {score}</p>
       <p className="text-xs text-slate mb-6">✅ {totalBenar} · ❌ {totalSalah}</p>
       <div className="flex gap-3">
-        <Button onClick={restartFromAwal}>Main Lagi</Button>
+        <Button onClick={() => startGame(paket, false)}>Main Lagi</Button>
         <Button variant="secondary" onClick={goHome}>Beranda</Button>
       </div>
     </div>
   )
 
+  // ——— EXIT CONFIRM —
+  if (showExitConfirm) return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh] animate-scale-in text-center">
+      <div className="text-5xl mb-4">🚪</div>
+      <h2 className="text-xl font-semibold tracking-tight text-ink mb-1">Yakin berhenti?</h2>
+      <p className="text-slate text-sm mb-6">Progress di level ini bakal ilang.</p>
+      <div className="flex gap-3">
+        <Button variant="danger" onClick={handleExit}>Ya, Berhenti</Button>
+        <Button variant="secondary" onClick={() => setShowExitConfirm(false)}>Batal</Button>
+      </div>
+    </div>
+  )
+
+  // ——— PLAY phase —
   const progress = ((soalIndex + (jawaban !== null ? 1 : 0)) / SOAL_PER_LEVEL) * 100
 
   return (
@@ -252,6 +300,10 @@ export default function Quiz() {
             {Array.from({ length: Math.max(0, MAX_LIVES - lives) }).map((_, i) => <span key={`e${i}`} className="text-lg opacity-30">❤️</span>)}
           </div>
           <Timer remaining={timer.remaining} running={timer.running} />
+          <button onClick={() => setShowExitConfirm(true)}
+            className="text-xs text-slate hover:text-error transition px-2 py-1 rounded-lg hover:bg-tint-rose">
+            ✕ Berhenti
+          </button>
         </div>
       </div>
 
@@ -284,7 +336,7 @@ export default function Quiz() {
               let cls = 'border-hairline bg-canvas hover:shadow-card-hover'
               if (jawaban !== null) {
                 if (p === current.jawaban) cls = 'border-[var(--color-success)] bg-tint-mint'
-                else if (p === jawaban || jawaban === '__timeout__') cls = 'border-error bg-[var(--color-tint-rose)]'
+                else if (p === jawaban || jawaban === '__timeout__') cls = 'bg-error text-white border-error'
                 else cls = 'border-hairline bg-canvas opacity-50'
               }
               return (

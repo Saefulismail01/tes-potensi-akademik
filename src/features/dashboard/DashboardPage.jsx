@@ -34,17 +34,23 @@ export default function DashboardPage() {
       </div>
 
       {/* High Score */}
-      {quizHighScore.score > 0 && (
-        <div className="rounded-xl border border-yellow-200 bg-yellow-50 p-4 mb-6 flex items-center gap-4">
-          <span className="text-3xl">🏆</span>
-          <div>
-            <p className="text-sm font-semibold text-yellow-800">High Score Quiz</p>
-            <p className="text-xs text-yellow-700">
-              Skor {quizHighScore.score} · Level {quizHighScore.level} ({LEVEL_NAMES[quizHighScore.level]}) · 🔥 Streak {quizHighScore.streak}
-            </p>
-          </div>
-        </div>
-      )}
+      <div className="space-y-2 mb-6">
+        {['sinonim', 'antonim'].map(kat => {
+          const hs = quizHighScore[kat]
+          if (!hs || hs.score <= 0) return null
+          return (
+            <div key={kat} className="rounded-xl border border-yellow-200 bg-yellow-50 p-3 flex items-center gap-3">
+              <span className="text-2xl">🏆</span>
+              <div>
+                <p className="text-sm font-semibold text-yellow-800 capitalize">Quiz {kat}</p>
+                <p className="text-xs text-yellow-700">
+                  Skor {hs.score} · Level {hs.level} ({LEVEL_NAMES[hs.level]}) · 🔥 {hs.streak}
+                </p>
+              </div>
+            </div>
+          )
+        })}
+      </div>
 
       {/* Mode cards */}
       <div className="grid gap-2.5 mb-8">

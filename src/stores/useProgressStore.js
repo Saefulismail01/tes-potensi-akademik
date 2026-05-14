@@ -13,12 +13,13 @@ const useProgressStore = create(
   persist(
     (set, get) => ({
       pakets: {},
-      quizHighScore: { level: 0, score: 0, streak: 0, totalBenar: 0, totalSalah: 0 },
+      quizHighScore: { sinonim: { score: 0, level: 0, streak: 0 }, antonim: { score: 0, level: 0, streak: 0 } },
 
-      updateQuizHighScore(score, level, streak) {
-        const current = get().quizHighScore
+      updateQuizHighScore(score, level, streak, kategori) {
+        const key = kategori === 'antonim' ? 'antonim' : 'sinonim'
+        const current = get().quizHighScore[key]
         if (score > current.score) {
-          set({ quizHighScore: { level, score, streak } })
+          set({ quizHighScore: { ...get().quizHighScore, [key]: { score, level, streak } } })
         }
       },
 
