@@ -198,7 +198,6 @@ export default function Quiz() {
   }
 
   function handleExit() {
-    clearCP()
     setShowExitConfirm(false)
     setPaket(null)
     setPhase('pick')
