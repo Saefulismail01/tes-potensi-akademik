@@ -169,8 +169,8 @@ export default function Quiz() {
 
       if (isLast) {
         timer.pause()
+        updateHighScore(score, level, streak, paket.jenis)
         if (level >= LEVELS.length) {
-          updateHighScore(score, level, streak, paket.jenis)
           setPhase('allClear')
         } else {
           if (checkpointLevels.includes(level)) {

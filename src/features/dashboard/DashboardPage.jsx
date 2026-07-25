@@ -3,8 +3,7 @@ import useProgressStore from '../../stores/useProgressStore'
 import ModeCard from './components/ModeCard'
 import MasteryOverview from './components/MasteryOverview'
 import WeakWordsList from './components/WeakWordsList'
-
-const LEVEL_NAMES = ['', 'Pemula', 'Pelajar', 'Mahasiswa', 'Sarjana', 'Magister', 'Doktor']
+import Leaderboard from './components/Leaderboard'
 
 const modes = [
   { to: '/flashcard', title: 'Flashcard', desc: 'Baca dan hafal dengan kartu', icon: '📇' },
@@ -33,23 +32,13 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      {/* High Score */}
-      <div className="space-y-2 mb-6">
-        {['sinonim', 'antonim'].map(kat => {
-          const hs = quizHighScore[kat]
-          if (!hs || hs.score <= 0) return null
-          return (
-            <div key={kat} className="rounded-xl border border-yellow-200 bg-yellow-50 p-3 flex items-center gap-3">
-              <span className="text-2xl">🏆</span>
-              <div>
-                <p className="text-sm font-semibold text-yellow-800 capitalize">Quiz {kat}</p>
-                <p className="text-xs text-yellow-700">
-                  Skor {hs.score} · Level {hs.level} ({LEVEL_NAMES[hs.level]}) · 🔥 {hs.streak}
-                </p>
-              </div>
-            </div>
-          )
-        })}
+      {/* Leaderboard */}
+      <div className="mb-6">
+        <Leaderboard
+          highScores={quizHighScore}
+          pakets={paketList}
+          getMastery={getMastery}
+        />
       </div>
 
       {/* Mode cards */}
